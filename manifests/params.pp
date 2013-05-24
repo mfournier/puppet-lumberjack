@@ -43,12 +43,12 @@ class lumberjack::params {
   #### Internal module values
 
   # packages
-  case $::operatingsystem {
-    'CentOS', 'Fedora', 'Scientific': {
+  case $::osfamily {
+    'RedHat': {
       # main application
       $package = [ 'lumberjack' ]
     }
-    'Debian', 'Ubuntu': {
+    'Debian': {
       # main application
       $package = [ 'lumberjack' ]
     }
@@ -59,14 +59,14 @@ class lumberjack::params {
   }
 
   # service parameters
-  case $::operatingsystem {
-    'CentOS', 'Fedora', 'Scientific': {
+  case $::osfamily {
+    'RedHat': {
       $service_name       = 'lumberjack'
       $service_hasrestart = true
       $service_hasstatus  = true
       $service_pattern    = $service_name
     }
-    'Debian', 'Ubuntu': {
+    'Debian': {
       $service_name       = 'lumberjack'
       $service_hasrestart = true
       $service_hasstatus  = true
