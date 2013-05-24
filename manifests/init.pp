@@ -157,8 +157,6 @@ class lumberjack(
       Class['lumberjack::config']  -> Class['lumberjack::service']
     }
 
-    Class['lumberjack::package'] -> Class['lumberjack::service']
-
   } else {
 
     # make sure all services are getting stopped before software removal
