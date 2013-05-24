@@ -150,7 +150,13 @@ class lumberjack(
     # we need the software before running a service
     Class['lumberjack::package'] -> Class['lumberjack::config']
 
-    Class['lumberjack::config']  -> Class['lumberjack::service']
+    # make sure configuration changes properly restart the daemon
+    if ($status in [ 'enabled', 'running' ]) {
+      Class['lumberjack::config']  ~> Class['lumberjack::service']
+    } else {
+      Class['lumberjack::config']  -> Class['lumberjack::service']
+    }
+
     Class['lumberjack::package'] -> Class['lumberjack::service']
 
   } else {
